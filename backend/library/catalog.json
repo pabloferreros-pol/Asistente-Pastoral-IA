@@ -1,0 +1,74 @@
+[
+  {
+    "filename": "CBA_Genesis.txt",
+    "title": "Comentario Bíblico Adventista — Génesis",
+    "category": "comentario",
+    "categoryLabel": "Comentario Bíblico Adventista",
+    "pdfPages": 491,
+    "sourcePdf": "1.-Genesis.pdf"
+  },
+  {
+    "filename": "CBA_Salmos.txt",
+    "title": "Comentario Bíblico Adventista — Salmos",
+    "category": "comentario",
+    "categoryLabel": "Comentario Bíblico Adventista",
+    "pdfPages": 754,
+    "sourcePdf": "19.-Salmos.pdf"
+  },
+  {
+    "filename": "CBA_Daniel.txt",
+    "title": "Comentario Bíblico Adventista — Daniel",
+    "category": "comentario",
+    "categoryLabel": "Comentario Bíblico Adventista",
+    "pdfPages": 230,
+    "sourcePdf": "27.-Daniel.pdf"
+  },
+  {
+    "filename": "CBA_Lucas.txt",
+    "title": "Comentario Bíblico Adventista — Lucas",
+    "category": "comentario",
+    "categoryLabel": "Comentario Bíblico Adventista",
+    "pdfPages": 447,
+    "sourcePdf": "42.-Lucas.pdf"
+  },
+  {
+    "filename": "CBA_Hechos.txt",
+    "title": "Comentario Bíblico Adventista — Hechos",
+    "category": "comentario",
+    "categoryLabel": "Comentario Bíblico Adventista",
+    "pdfPages": 665,
+    "sourcePdf": "44.-Hechos.pdf"
+  },
+  {
+    "filename": "CBA_Romanos.txt",
+    "title": "Comentario Bíblico Adventista — Romanos",
+    "category": "comentario",
+    "categoryLabel": "Comentario Bíblico Adventista",
+    "pdfPages": 353,
+    "sourcePdf": "45.-Romanos.pdf"
+  },
+  {
+    "filename": "Diccionario_Biblico_Adventista.txt",
+    "title": "Diccionario Bíblico Adventista del Séptimo Día",
+    "category": "diccionario",
+    "categoryLabel": "Diccionario",
+    "pdfPages": 2121,
+    "sourcePdf": "Diccionario Bíblico Adventista del Séptimo Día(1).pdf"
+  },
+  {
+    "filename": "Tratado_Teologia_Adventista.txt",
+    "title": "Tratado de Teología Adventista del Séptimo Día",
+    "category": "teologia",
+    "categoryLabel": "Teología",
+    "pdfPages": 1195,
+    "sourcePdf": "Tratado Teología IASD(1).pdf"
+  },
+  {
+    "filename": "Creencias_Adventistas.txt",
+    "title": "Creencias de los Adventistas del Séptimo Día",
+    "category": "creencias",
+    "categoryLabel": "Creencias",
+    "pdfPages": 434,
+    "sourcePdf": "libro28creenciasadventistasseptimodia(1).pdf"
+  }
+]
