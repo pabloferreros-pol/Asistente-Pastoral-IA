@@ -1,0 +1,257 @@
+ASISTENTE PASTORAL IA — v0.7B CLOUD + APK
+==========================================
+
+OBJETIVO DE ESTA VERSIÓN
+
+1. Publicar el backend con HTTPS.
+2. Hacer que el teléfono deje de depender de la IP de tu PC.
+3. Generar una APK instalable directamente en Android.
+4. Mantener la Biblioteca Inteligente funcionando en la nube.
+
+--------------------------------------------------
+PARTE A — SUBIR ESTE PROYECTO A GITHUB
+--------------------------------------------------
+
+El ZIP contiene:
+
+backend/
+mobile/
+render.yaml
+
+La forma más simple es crear un repositorio nuevo en GitHub, por ejemplo:
+
+asistente-pastoral-ia
+
+y subir TODO el contenido de esta carpeta.
+
+IMPORTANTE:
+NO subas el archivo .env que contiene tu API Key.
+La clave se configura después directamente en Render.
+
+--------------------------------------------------
+PARTE B — CREAR EL BACKEND EN RENDER
+--------------------------------------------------
+
+En Render:
+
+1. New
+2. Blueprint
+
+o bien:
+
+1. New
+2. Web Service
+3. Conectar el repositorio de GitHub
+
+El archivo render.yaml ya está preparado.
+
+Nombre esperado:
+asistente-pastoral-ia-api
+
+Root Directory:
+backend
+
+Build Command:
+npm install
+
+Start Command:
+npm start
+
+Health Check:
+ /health
+
+Variables necesarias:
+
+OPENAI_API_KEY
+  tu API key de OpenAI
+
+OPENAI_MODEL
+  gpt-5.6-luna
+
+LIBRARY_VECTOR_STORE_ID
+  al principio puede quedar vacío.
+
+Cuando Render termine, te dará una dirección similar a:
+
+https://asistente-pastoral-ia-api.onrender.com
+
+Abrí:
+
+https://TU-URL.onrender.com/health
+
+Debe responder con:
+ok: true
+
+--------------------------------------------------
+PARTE C — BIBLIOTECA EN RENDER
+--------------------------------------------------
+
+En la primera ejecución:
+
+1. Abrí la app todavía con Expo.
+2. Hacé que mobile/.env apunte a la URL de Render.
+3. Entrá en Biblioteca.
+4. Activá/indexá la Biblioteca piloto.
+5. Esperá a que termine.
+
+Luego consultá:
+
+https://TU-URL.onrender.com/api/biblioteca/status
+
+Buscá:
+vectorStoreId
+
+Va a ser algo parecido a:
+vs_abc123...
+
+COPIÁ ese valor.
+
+En Render:
+Environment
+
+agregá:
+
+LIBRARY_VECTOR_STORE_ID=vs_abc123...
+
+Guardá.
+
+Esto es MUY IMPORTANTE en Render Free:
+el disco local es temporal.
+Con LIBRARY_VECTOR_STORE_ID la Biblioteca puede volver a conectarse
+al índice de OpenAI después de que Render se reinicie.
+
+--------------------------------------------------
+PARTE D — CONECTAR LA APP A RENDER
+--------------------------------------------------
+
+Dentro de:
+
+mobile/.env
+
+poner:
+
+EXPO_PUBLIC_API_URL=https://TU-URL.onrender.com
+
+SIN barra / al final.
+
+Ejemplo:
+
+EXPO_PUBLIC_API_URL=https://asistente-pastoral-ia-api.onrender.com
+
+Después:
+
+Ctrl + C
+npx expo start -c
+
+Probá:
+- Sermón
+- Biblioteca
+- Visitas
+- Mis materiales
+
+IMPORTANTE:
+En Render Free, el servidor puede dormirse por inactividad.
+La primera consulta después de un tiempo puede demorar aproximadamente
+un minuto mientras vuelve a arrancar.
+
+--------------------------------------------------
+PARTE E — GENERAR LA APK
+--------------------------------------------------
+
+En Windows, entrar a:
+
+mobile
+
+Instalar EAS CLI una sola vez:
+
+npm install --global eas-cli
+
+Luego:
+
+eas login
+
+Iniciar/configurar el proyecto:
+
+eas build:configure
+
+Cuando pregunte por Android package, ya está definido:
+
+ar.org.asistentepastoral.ia
+
+Para crear APK instalable:
+
+eas build -p android --profile preview
+
+Esperar a que termine.
+
+Expo mostrará un enlace/QR para descargar la APK.
+
+Abrí ese enlace desde el celular.
+Descargá el APK.
+Android puede pedir permiso para instalar apps desde el navegador.
+Aceptalo para ese archivo.
+
+La app aparecerá instalada como:
+
+Asistente Pastoral IA
+
+y NO necesitarás Expo Go.
+
+--------------------------------------------------
+PARTE F — GOOGLE PLAY MÁS ADELANTE
+--------------------------------------------------
+
+La APK sirve para:
+- tu teléfono;
+- pruebas;
+- compartir con testers.
+
+Para Google Play se usa:
+
+eas build -p android --profile production
+
+Eso genera un AAB.
+
+--------------------------------------------------
+IMPORTANTE SOBRE DATOS GUARDADOS
+--------------------------------------------------
+
+Render Free tiene sistema de archivos temporal.
+
+Por eso:
+- la Biblioteca queda protegida mediante LIBRARY_VECTOR_STORE_ID;
+- los PDFs y fuentes vienen incluidos en el proyecto;
+- los sermones de "Mis materiales" que hoy se guardan en materials.json
+  todavía NO son persistencia definitiva en la nube.
+
+Antes de publicar comercialmente vamos a mover:
+- usuarios;
+- materiales guardados;
+- favoritos;
+- historial
+
+a una base de datos real (por ejemplo PostgreSQL/Supabase).
+
+Para la primera APK de prueba esto NO bloquea el avance.
+
+--------------------------------------------------
+ARCHIVOS NUEVOS / ACTUALIZADOS
+--------------------------------------------------
+
+render.yaml
+.gitignore
+
+backend/
+  server.mjs
+  package.json
+  .env.example
+  src/
+  library/
+
+mobile/
+  versión 0.7.1
+  app.json
+  eas.json
+  .env.example
+  assets/
+  y toda la interfaz Blue & Gold de v0.7A
