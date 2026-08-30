@@ -5,13 +5,14 @@
     "version": "0.8.0",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
+    "backgroundColor": "#06182A",
     "android": {
-      "package": "ar.org.asistentepastoral.ia",
-      "navigationBar": {
-        "backgroundColor": "#06182A",
-        "barStyle": "light-content",
-        "visible": "visible"
-      }
+      "package": "ar.org.asistentepastoral.ia"
+    },
+    "androidNavigationBar": {
+      "backgroundColor": "#06182A",
+      "barStyle": "light-content",
+      "enforceContrast": false
     },
     "ios": {
       "bundleIdentifier": "ar.org.asistentepastoral.ia",
