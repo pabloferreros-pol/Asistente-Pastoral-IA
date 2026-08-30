@@ -6,13 +6,20 @@
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
     "backgroundColor": "#06182A",
+    "plugins": [
+      [
+        "expo-navigation-bar",
+        {
+          "backgroundColor": "#06182A",
+          "barStyle": "light",
+          "visibility": "visible",
+          "behavior": "inset-swipe",
+          "position": "relative"
+        }
+      ]
+    ],
     "android": {
       "package": "ar.org.asistentepastoral.ia"
-    },
-    "androidNavigationBar": {
-      "backgroundColor": "#06182A",
-      "barStyle": "light-content",
-      "enforceContrast": false
     },
     "ios": {
       "bundleIdentifier": "ar.org.asistentepastoral.ia",
