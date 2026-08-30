@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Asistente Pastoral IA",
+    "slug": "asistente-pastoral-ia",
+    "version": "0.8.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "android": {
+      "package": "ar.org.asistentepastoral.ia",
+      "navigationBar": {
+        "backgroundColor": "#06182A",
+        "barStyle": "light-content",
+        "visible": "visible"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "ar.org.asistentepastoral.ia",
+      "supportsTablet": true
+    }
+  }
+}
