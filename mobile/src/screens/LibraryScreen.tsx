@@ -3,6 +3,7 @@ import { ActivityIndicator, Pressable, StyleSheet, Text, TextInput, View } from 
 import { api, LibrarySearchResult, LibrarySource, LibrarySourcePage, LibraryStatus } from "../api/client";
 import { Card, Page, PrimaryButton, SectionIntro } from "../components/UI";
 import { theme } from "../theme";
+import { ResultActions } from "../components/ResultActions";
 
 const categories = [{ id: "all", label: "Todas" }, { id: "comentario", label: "Comentario" }, { id: "diccionario", label: "Diccionario" }, { id: "teologia", label: "Teología" }, { id: "creencias", label: "Creencias" }];
 
@@ -66,7 +67,7 @@ export function LibraryScreen({ onBack }: { onBack: () => void }) {
       <Card><Text style={styles.searchTitle}>¿Qué querés investigar hoy?</Text><TextInput value={query} onChangeText={setQuery} placeholder="Ej.: Lucas 7:11-17 y la viuda de Naín" placeholderTextColor="#70889F" multiline style={styles.input} /><Text style={styles.filterLabel}>Buscar en</Text><View style={styles.chips}>{categories.map((item) => <Pressable key={item.id} onPress={() => setCategory(item.id)} style={[styles.chip, category === item.id && styles.chipSelected]}><Text style={[styles.chipText, category === item.id && styles.chipTextSelected]}>{item.label}</Text></Pressable>)}</View></Card>
       <PrimaryButton title={searching ? "Buscando en las fuentes…" : "Buscar en mi biblioteca"} onPress={search} disabled={searching} />
       {searching ? <Card><ActivityIndicator color={theme.colors.gold} /><Text style={styles.center}>Buscando fragmentos y construyendo una síntesis documentada…</Text></Card> : null}
-      {result ? <SearchResult result={result} onOpen={openSource} /> : null}
+      {result ? <><SearchResult result={result} onOpen={openSource} /><ResultActions title={`Biblioteca: ${query}`} content={`${result.answer}\n\nUSO PASTORAL\n${result.pastoralUse}\n\nFUENTES\n${result.sources.map((source, i) => `[${i + 1}] ${source.title} — ${source.pageLabel}`).join("\n")}`} type="biblioteca" topic={query} context={{ query, category, sources: result.sources }} /></> : null}
       {status.catalog?.length ? <Card><Text style={styles.searchTitle}>Fuentes disponibles</Text>{status.catalog.map((item: any) => <View key={item.filename} style={styles.catalogRow}><Text style={styles.catalogTitle}>{item.title}</Text><Text style={styles.catalogMeta}>{item.categoryLabel} · {item.pdfPages} páginas</Text></View>)}</Card> : null}
     </> : null}
   </Page>;

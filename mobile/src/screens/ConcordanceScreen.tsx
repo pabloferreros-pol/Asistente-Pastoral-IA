@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { api } from "../api/client";
 import { Card, Chips, Field, Page, PrimaryButton, ResultBox, SectionIntro } from "../components/UI";
 import { theme } from "../theme";
+import { ResultActions } from "../components/ResultActions";
 
 const examples = ["perdón", "ansiedad", "sábado", "esperanza", "segunda venida"];
 
@@ -27,6 +28,7 @@ export function ConcordanceScreen({ onBack }: { onBack: () => void }) {
     <Card><Field label="Tema" value={topic} onChangeText={setTopic} placeholder="Ej.: perdón, ansiedad, sábado, segunda venida" /><Chips label="¿Para qué lo necesitás?" options={["Predicación", "Visita pastoral", "Jóvenes", "Evangelismo", "Estudio personal"]} value={use} onChange={setUse} /></Card>
     <PrimaryButton title={loading ? "Buscando textos…" : "Buscar en la Biblia"} onPress={submit} disabled={loading} />
     <ResultBox loading={loading} error={error} result={result} />
+    <ResultActions title={`Concordancia temática: ${topic}`} content={result} type="concordancia" topic={topic} context={{ topic, use }} />
   </Page>;
 }
 

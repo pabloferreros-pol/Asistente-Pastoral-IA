@@ -27,7 +27,7 @@ export type SermonData = {
   movements: SermonMovement[]; illustration: string; applications: string[]; call: string; finalPrayer: string; preacherSummary: string[];
 };
 export type LibrarySource = { id: string; filename: string; title: string; pageLabel: string; pageStart?: number | null; score: number; excerpt?: string; categoryLabel?: string };
-export type MaterialItem = { id: string; type: string; title: string; topic?: string; sermon?: SermonData | null; context?: any; createdAt: string };
+export type MaterialItem = { id: string; type: string; title: string; topic?: string; sermon?: SermonData | null; content?: string; context?: any; createdAt: string };
 export type LibraryStatus = { ready: boolean; status: string; catalog?: any[]; [key: string]: any };
 export type LibrarySearchResult = { answer: string; pastoralUse: string; evidenceLevel: string; sources: LibrarySource[] };
 export type LibrarySourcePage = { filename: string; title?: string; currentPage: number; totalPages?: number; text?: string; content?: string; [key: string]: any };
@@ -44,6 +44,7 @@ export const api = {
   saveMaterial: (body: any) => request<{ item: MaterialItem }>("/api/materiales", { method: "POST", body: JSON.stringify(body) }),
   deleteMaterial: (id: string) => request<{ ok: boolean }>(`/api/materiales/${id}`, { method: "DELETE" }),
   exportSermon: (format: "word" | "ppt", sermon: SermonData, context?: any) => request<{ url: string }>("/api/exportar-sermon", { method: "POST", body: JSON.stringify({ format, sermon, context }) }).then((data) => ({ url: data.url.startsWith("http") ? data.url : `${API_URL}${data.url}` })),
+  exportDocument: (format: "pdf" | "word", title: string, content: string) => request<{ url: string }>("/api/exportar-documento", { method: "POST", body: JSON.stringify({ format, title, content }) }).then((data) => ({ url: data.url.startsWith("http") ? data.url : `${API_URL}${data.url}` })),
   libraryStatus: () => request<LibraryStatus>("/api/biblioteca/status"),
   configureLibrary: () => request<LibraryStatus>("/api/biblioteca/configurar", { method: "POST", body: "{}" }),
   searchLibrary: (query: string, category = "all") => request<LibrarySearchResult>("/api/biblioteca/buscar", { method: "POST", body: JSON.stringify({ query, category }) }),

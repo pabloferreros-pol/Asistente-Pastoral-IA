@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { api } from "../api/client";
 import { Card, Chips, Field, Page, PrimaryButton, ResultBox, SectionIntro } from "../components/UI";
 import { theme } from "../theme";
+import { ResultActions } from "../components/ResultActions";
 
 export function BiblicalWorldScreen({ onBack }: { onBack: () => void }) {
   const [query, setQuery] = useState("");
@@ -30,6 +31,7 @@ export function BiblicalWorldScreen({ onBack }: { onBack: () => void }) {
     <Card><Field label="Pasaje, tema o costumbre" value={query} onChangeText={setQuery} placeholder="Ej.: Lucas 15:11-32 / anillo / funerales / sinagoga" multiline /><Chips label="Enfoque" options={["Comprender el pasaje", "Predicación", "Costumbres", "Contexto social", "Geografía"]} value={focus} onChange={setFocus} /></Card>
     <PrimaryButton title={loading ? "Investigando contexto…" : "Investigar contexto"} onPress={submit} disabled={loading} />
     <ResultBox loading={loading} error={error} result={result} />
+    <ResultActions title={`Mundo bíblico: ${query}`} content={result} type="mundo-biblico" topic={query} context={{ query, focus }} />
   </Page>;
 }
 

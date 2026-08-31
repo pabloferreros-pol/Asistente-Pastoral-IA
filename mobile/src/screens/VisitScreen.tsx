@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { api } from "../api/client";
 import { Card, Field, MultiChips, Page, PrimaryButton, ResultBox, SectionIntro } from "../components/UI";
 import { theme } from "../theme";
+import { ResultActions } from "../components/ResultActions";
 
 const SITUATIONS = ["Duelo", "Enfermedad", "Familia", "Matrimonio", "Jóvenes", "Crisis espiritual", "Persona alejada", "Bautismo"];
 const NEEDS = ["Preparar la visita", "Qué decir", "Qué evitar", "Textos bíblicos", "Oración", "Reflexión breve"];
@@ -37,6 +38,7 @@ export function VisitScreen({ onBack }: { onBack: () => void }) {
     </Card>
     <PrimaryButton title={loading ? "Preparando guía pastoral…" : "Preparar visita"} onPress={submit} disabled={loading} />
     <ResultBox loading={loading} error={error} result={result} />
+    <ResultActions title={`Visita pastoral: ${situations.join(", ")}`} content={result} type="visita" topic={situations.join(", ")} context={{ situations, details, needs }} />
   </Page>;
 }
 

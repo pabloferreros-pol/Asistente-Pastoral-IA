@@ -2,7 +2,7 @@
   "expo": {
     "name": "Asistente Pastoral IA",
     "slug": "asistente-pastoral-ia",
-    "version": "0.8.1",
+    "version": "0.8.2",
     "orientation": "portrait",
     "userInterfaceStyle": "dark",
     "backgroundColor": "#06182A",
@@ -20,7 +20,7 @@
     ],
     "android": {
       "package": "ar.org.asistentepastoral.ia",
-      "versionCode": 2
+      "versionCode": 3
     },
     "ios": {
       "bundleIdentifier": "ar.org.asistentepastoral.ia",

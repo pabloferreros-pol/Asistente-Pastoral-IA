@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { api } from "../api/client";
 import { Card, Chips, Field, Page, PrimaryButton, ResultBox, SectionIntro } from "../components/UI";
 import { theme } from "../theme";
+import { ResultActions } from "../components/ResultActions";
 
 const quickAreas = ["Visita", "Duelo", "Enfermedad", "Familia", "Matrimonio", "Jóvenes", "Bautismo", "Santa Cena", "Crisis espiritual"];
 
@@ -27,6 +28,7 @@ export function MinistryScreen({ onBack }: { onBack: () => void }) {
     <Card><Chips label="¿Sobre qué tema trabajamos?" options={quickAreas} value={area} onChange={setArea} /><Field label="¿Qué necesitás?" value={request} onChangeText={setRequest} placeholder="Describí la situación, el material o el problema que querés resolver." multiline /></Card>
     <PrimaryButton title={loading ? "Preparando ayuda pastoral…" : "Ayudarme con esto"} onPress={submit} disabled={loading} />
     <ResultBox loading={loading} error={error} result={result} />
+    <ResultActions title={`Ministerio pastoral: ${area}`} content={result} type="ministerio" topic={area} context={{ area, request }} />
   </Page>;
 }
 
