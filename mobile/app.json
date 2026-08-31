@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Asistente Pastoral IA",
+    "slug": "asistente-pastoral-ia",
+    "version": "0.8.2",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#06182A",
+    "plugins": [
+      [
+        "expo-navigation-bar",
+        {
+          "backgroundColor": "#06182A",
+          "barStyle": "light",
+          "visibility": "visible",
+          "behavior": "inset-swipe",
+          "position": "relative"
+        }
+      ]
+    ],
+    "android": {
+      "package": "ar.org.asistentepastoral.ia",
+      "versionCode": 3
+    },
+    "ios": {
+      "bundleIdentifier": "ar.org.asistentepastoral.ia",
+      "supportsTablet": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cf6c06f0-620c-46bf-8c06-8af02ec9b192"
+      }
+    },
+    "owner": "polferreros-team"
+  }
+}

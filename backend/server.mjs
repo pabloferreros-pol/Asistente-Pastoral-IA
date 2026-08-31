@@ -14,6 +14,7 @@ import {
   HeadingLevel,
 } from "docx";
 import PptxGenJS from "pptxgenjs";
+import PDFDocument from "pdfkit";
 import {
   saturdayPrompt,
   developSermonPrompt,
@@ -553,6 +554,7 @@ app.post("/api/materiales", (req, res) => {
     title,
     topic,
     sermon,
+    content,
     context,
   } = req.body || {};
 
@@ -570,6 +572,7 @@ app.post("/api/materiales", (req, res) => {
     title,
     topic: topic || "",
     sermon: sermon || null,
+    content: content || "",
     context: context || null,
     createdAt: new Date().toISOString(),
   };
@@ -589,6 +592,47 @@ app.delete("/api/materiales/:id", (req, res) => {
   writeMaterials(next);
 
   res.json({ ok: true });
+});
+
+app.post("/api/exportar-documento", async (req, res) => {
+  try {
+    const { format, title, content } = req.body || {};
+    const cleanTitle = String(title || "Material pastoral").trim();
+    const cleanContent = String(content || "").trim();
+
+    if (!cleanContent) {
+      return res.status(400).json({ error: "Falta el contenido para exportar." });
+    }
+
+    const base = `${safeFilename(cleanTitle)}-${Date.now()}`;
+
+    if (format === "word") {
+      const fileName = `${base}.docx`;
+      const filePath = path.join(exportsDir, fileName);
+      const paragraphs = cleanContent.split(/\n+/).filter(Boolean).map((text) => new Paragraph({ text }));
+      const doc = new Document({ sections: [{ children: [new Paragraph({ text: cleanTitle, heading: HeadingLevel.TITLE }), ...paragraphs] }] });
+      fs.writeFileSync(filePath, await Packer.toBuffer(doc));
+      return res.json({ url: `/exports/${encodeURIComponent(fileName)}` });
+    }
+
+    if (format === "pdf") {
+      const fileName = `${base}.pdf`;
+      const filePath = path.join(exportsDir, fileName);
+      const pdf = new PDFDocument({ margin: 54, size: "A4", info: { Title: cleanTitle, Author: "ASISTENTE PASTORAL IA" } });
+      const stream = fs.createWriteStream(filePath);
+      pdf.pipe(stream);
+      pdf.fontSize(22).fillColor("#06182A").text(cleanTitle, { align: "center" });
+      pdf.moveDown(1.5).fontSize(11).fillColor("#24384A").text(cleanContent, { lineGap: 4, align: "left" });
+      pdf.end();
+      await new Promise((resolve, reject) => { stream.on("finish", resolve); stream.on("error", reject); });
+      return res.json({ url: `/exports/${encodeURIComponent(fileName)}` });
+    }
+
+    return res.status(400).json({ error: "Formato no válido." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "No pude generar el documento." });
+  }
 });
 
 app.post("/api/exportar-sermon", async (req, res) => {
