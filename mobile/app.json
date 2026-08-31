@@ -24,6 +24,12 @@
     "ios": {
       "bundleIdentifier": "ar.org.asistentepastoral.ia",
       "supportsTablet": true
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cf6c06f0-620c-46bf-8c06-8af02ec9b192"
+      }
+    },
+    "owner": "polferreros-team"
   }
 }

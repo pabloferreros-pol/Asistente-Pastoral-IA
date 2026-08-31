@@ -2,7 +2,7 @@
   "name": "asistente-pastoral-ia-mobile",
   "version": "0.8.0",
   "private": true,
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
